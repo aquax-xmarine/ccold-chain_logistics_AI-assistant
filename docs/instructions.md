@@ -147,7 +147,35 @@ CREATE TABLE FDE_VIEWS.AgentAuditLog (
 GRANT INSERT ON FDE_VIEWS.AgentAuditLog TO USR_FDE_RO;
 ```
 ## Phase 5
+streamlit run src\ui.py
 
+## Phase 6
+- Deployment
+```
+sudo apt update && sudo apt install -y python3-pip python3-venv git
+cd /home/ubuntu
+git clone https://github.com/aquax-xmarine/ccold-chain_logistics_AI-assistant.git
+cd ccold-chain_logistics_AI-assistant
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+streamlit run src/ui.py
+```
+
+# 1. Add the Microsoft GPG repository key 
+curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg
+
+# 2. Add the Microsoft SQL Server Ubuntu repository 
+curl -fsSL https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
+
+# 3. Update apt and install the driver (Accepting the EULA) 
+sudo apt-get update 
+sudo ACCEPT_EULA=Y apt-get install -y msodbcsql18
+
+# 4. Install the unixODBC development headers 
+sudo apt-get install -y unixodbc-dev
+
+Create the systemd service file
 
 
 
